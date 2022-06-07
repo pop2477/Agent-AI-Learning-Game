@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://art/Goal.png" type="Texture" id=1]
+[ext_resource path="res://art/False.png" type="Texture" id=2]
+[ext_resource path="res://art/Unevaluated.png" type="Texture" id=3]
+[ext_resource path="res://art/True.png" type="Texture" id=4]
+[ext_resource path="res://art/light.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Arrest.gd" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.0
+
+[node name="Arrest" type="Sprite"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 6 )
+
+[node name="NotEvaluated" type="Sprite" parent="."]
+position = Vector2( 50, -25 )
+texture = ExtResource( 3 )
+
+[node name="True" type="Sprite" parent="."]
+position = Vector2( 50, -25 )
+texture = ExtResource( 4 )
+
+[node name="False" type="Sprite" parent="."]
+position = Vector2( 50, -25 )
+texture = ExtResource( 2 )
+
+[node name="Drag" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Drag"]
+polygon = PoolVector2Array( -33.8066, 47.2094, -11.5575, 42.5526, 6.96615, 21.9593, 23.8341, 10.99, 39.2532, 11.0935, 59.2256, 28.2718, 60.0535, -30.7141, 38.3218, -47.582, 26.7316, -47.8924, 16.1762, -44.6844, 5.82782, -7.2232, -20.7676, 4.26353, -60.5055, -30.3001, -60.0915, 30.5485, -45.8107, 43.1736 )
+
+[node name="ConnectParent" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectParent"]
+position = Vector2( -10, -21 )
+shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -10, -21 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 5 )
+
+[connection signal="input_event" from="Drag" to="." method="_on_Drag_input_event"]
+[connection signal="input_event" from="ConnectParent" to="." method="_on_ConnectParent_input_event"]
+[connection signal="mouse_entered" from="ConnectParent" to="." method="_on_ConnectParent_mouse_entered"]
+[connection signal="mouse_exited" from="ConnectParent" to="." method="_on_ConnectParent_mouse_exited"]

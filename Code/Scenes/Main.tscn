@@ -1,0 +1,228 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://art/Area.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Agent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/Suspect.png" type="Texture" id=3]
+[ext_resource path="res://art/Random1.png" type="Texture" id=4]
+[ext_resource path="res://art/Random3.png" type="Texture" id=5]
+[ext_resource path="res://art/Random2.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Root.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/QueryNode.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Sequence.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Inverse.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Arrest.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/List.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Font/Lato-Regular.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://art/Reload.png" type="Texture" id=15]
+[ext_resource path="res://art/Play.png" type="Texture" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 170
+font_data = ExtResource( 14 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 13.6835
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 11.0175, 11.7244 )
+
+[node name="Demo" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="GameScreen" type="TextureRect" parent="."]
+margin_left = 424.0
+margin_right = 524.0
+margin_bottom = 100.0
+rect_scale = Vector2( 6, 6 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NPC1" type="Sprite" parent="GameScreen"]
+position = Vector2( 68.5867, 81.4561 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 4 )
+
+[node name="NPC2" type="Sprite" parent="GameScreen"]
+position = Vector2( 14.3835, 35.2775 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 6 )
+
+[node name="NPC3" type="Sprite" parent="GameScreen"]
+position = Vector2( 44.5132, 18.4715 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 5 )
+
+[node name="Suspect" type="Sprite" parent="GameScreen"]
+position = Vector2( 89.3292, 38.7598 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 3 )
+
+[node name="Agent" parent="GameScreen" instance=ExtResource( 2 )]
+position = Vector2( 13.2734, 79.9838 )
+scale = Vector2( 0.75, 0.75 )
+z_index = 1
+
+[node name="Label4" type="Label" parent="GameScreen"]
+margin_left = 69.2213
+margin_top = 51.3096
+margin_right = 131.221
+margin_bottom = 65.3096
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 1, 0.933333, 0, 1 )
+text = "Suspect 4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="GameScreen"]
+margin_left = 30.7157
+margin_top = 28.6888
+margin_right = 92.7157
+margin_bottom = 59.6888
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 1, 0.933333, 0, 1 )
+text = "Suspect 3
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="GameScreen"]
+margin_left = 0.82769
+margin_top = 49.2004
+margin_right = 62.8277
+margin_bottom = 63.2004
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 1, 0.933333, 0, 1 )
+text = "Suspect 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameScreen"]
+margin_left = 54.6222
+margin_top = 93.271
+margin_right = 116.622
+margin_bottom = 107.271
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 1, 0.933333, 0, 1 )
+text = "Suspect 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Root" parent="." instance=ExtResource( 7 )]
+position = Vector2( 220, 30 )
+scale = Vector2( 0.6, 0.6 )
+z_index = 1
+
+[node name="HasRedHat" parent="." instance=ExtResource( 8 )]
+position = Vector2( 66.7697, 162.599 )
+z_index = 1
+query = "Has Red hat?"
+
+[node name="HasNoGlasses" parent="." instance=ExtResource( 8 )]
+position = Vector2( 66.41, 221.5 )
+z_index = 1
+query = "Has no Glasses?"
+
+[node name="HasOrangeShirt" parent="." instance=ExtResource( 8 )]
+position = Vector2( 65.8759, 256.553 )
+z_index = 1
+query = "Has Orange Shirt?"
+
+[node name="SequenceNode" parent="." instance=ExtResource( 10 )]
+position = Vector2( 65.0104, 319.691 )
+
+[node name="Inverse" parent="." instance=ExtResource( 11 )]
+position = Vector2( 60.8868, 381.52 )
+
+[node name="Arrest" parent="." instance=ExtResource( 12 )]
+position = Vector2( 64.7969, 437.379 )
+
+[node name="List" parent="." instance=ExtResource( 13 )]
+position = Vector2( 57.6805, 517.814 )
+
+[node name="TreeSpace" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_right = 424.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.298039, 0.298039, 0.298039, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CompletedLabel" type="Label" parent="CanvasLayer"]
+margin_left = 1.0
+margin_top = 208.0
+margin_right = 1026.0
+margin_bottom = 449.0
+custom_colors/font_color = Color( 0.156863, 0.701961, 0.156863, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "COMPLETED"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FailLabel" type="Label" parent="CanvasLayer"]
+margin_left = 282.025
+margin_top = 211.128
+margin_right = 552.025
+margin_bottom = 452.128
+custom_colors/font_color = Color( 0.976471, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Fail"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Replay" type="Sprite" parent="."]
+position = Vector2( 403.482, 583.31 )
+texture = ExtResource( 15 )
+
+[node name="ReplayB" type="Area2D" parent="Replay"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Replay/ReplayB"]
+shape = SubResource( 2 )
+
+[node name="Play" type="Sprite" parent="."]
+position = Vector2( 447.305, 582.264 )
+texture = ExtResource( 16 )
+
+[node name="PlayB" type="Area2D" parent="Play"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Play/PlayB"]
+position = Vector2( -0.332001, 0.249023 )
+shape = SubResource( 3 )
+
+[node name="FailTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Wait" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="connect_child1" from="Root" to="." method="_on_Root_connect_child1"]
+[connection signal="connect_child2" from="Root" to="." method="_on_Root_connect_child2"]
+[connection signal="ready_to_connect" from="HasRedHat" to="." method="_on_HasRedHat_ready_to_connect"]
+[connection signal="ready_to_connect" from="HasNoGlasses" to="." method="_on_HasNoGlasses_ready_to_connect"]
+[connection signal="ready_to_connect" from="HasOrangeShirt" to="." method="_on_HasOrangeShirt_ready_to_connect"]
+[connection signal="connect_child1" from="SequenceNode" to="." method="_on_SequenceNode_connect_child1"]
+[connection signal="connect_child2" from="SequenceNode" to="." method="_on_SequenceNode_connect_child2"]
+[connection signal="connect_child3" from="SequenceNode" to="." method="_on_SequenceNode_connect_child3"]
+[connection signal="connect_child4" from="SequenceNode" to="." method="_on_SequenceNode_connect_child4"]
+[connection signal="connect_parent" from="SequenceNode" to="." method="_on_SequenceNode_connect_parent"]
+[connection signal="connect_child" from="Inverse" to="." method="_on_Inverse_connect_child"]
+[connection signal="connect_parent" from="Inverse" to="." method="_on_Inverse_connect_parent"]
+[connection signal="connect_parent" from="Arrest" to="." method="_on_Arrest_connect_parent"]
+[connection signal="connect_parent" from="List" to="." method="_on_List_connect_parent"]
+[connection signal="input_event" from="Replay/ReplayB" to="." method="_on_ReplayB_input_event"]
+[connection signal="input_event" from="Play/PlayB" to="." method="_on_PlayB_input_event"]
+[connection signal="timeout" from="FailTimer" to="." method="_on_FailTimer_timeout"]
+[connection signal="timeout" from="Wait" to="." method="_on_Wait_timeout"]

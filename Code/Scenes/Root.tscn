@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://art/Root.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Root.gd" type="Script" id=2]
+[ext_resource path="res://art/light.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[node name="Sprite" type="Sprite"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Child1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Child1"]
+position = Vector2( -28, 28 )
+shape = SubResource( 1 )
+
+[node name="Child2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Child2"]
+position = Vector2( 28, 27.637 )
+shape = SubResource( 2 )
+
+[node name="Light1" type="Light2D" parent="."]
+position = Vector2( -28, 28.102 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 3 )
+
+[node name="Light2" type="Light2D" parent="."]
+position = Vector2( 28, 28 )
+scale = Vector2( 0.7, 0.6 )
+texture = ExtResource( 3 )
+
+[connection signal="input_event" from="Child1" to="." method="_on_Child1_input_event"]
+[connection signal="mouse_entered" from="Child1" to="." method="_on_Child1_mouse_entered"]
+[connection signal="mouse_exited" from="Child1" to="." method="_on_Child1_mouse_exited"]
+[connection signal="input_event" from="Child2" to="." method="_on_Child2_input_event"]
+[connection signal="mouse_entered" from="Child2" to="." method="_on_Child2_mouse_entered"]
+[connection signal="mouse_exited" from="Child2" to="." method="_on_Child2_mouse_exited"]

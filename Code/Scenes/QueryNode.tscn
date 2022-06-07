@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/QueryNode.gd" type="Script" id=1]
+[ext_resource path="res://art/True.png" type="Texture" id=2]
+[ext_resource path="res://art/Query.png" type="Texture" id=3]
+[ext_resource path="res://art/False.png" type="Texture" id=4]
+[ext_resource path="res://art/Unevaluated.png" type="Texture" id=5]
+[ext_resource path="res://Font/Lato-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://art/light.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 59.4037, 20.864 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 6 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="QueryNode" type="Sprite"]
+position = Vector2( 30, 15 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 1 )
+
+[node name="NotEvaluated" type="Sprite" parent="."]
+position = Vector2( 48, -20 )
+texture = ExtResource( 5 )
+
+[node name="True" type="Sprite" parent="."]
+position = Vector2( 48, -20 )
+texture = ExtResource( 2 )
+
+[node name="False" type="Sprite" parent="."]
+position = Vector2( 48, -20 )
+texture = ExtResource( 4 )
+
+[node name="Drag" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Drag"]
+z_index = 1
+shape = SubResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -58.0
+margin_top = -15.0
+margin_right = 58.0
+margin_bottom = 27.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.4, 1, 0.4, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectParent" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectParent"]
+position = Vector2( 0, -32 )
+shape = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -32 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 2
+texture = ExtResource( 7 )
+
+[connection signal="input_event" from="Drag" to="." method="_on_Area2D_input_event"]
+[connection signal="input_event" from="ConnectParent" to="." method="_on_ConnectParent_input_event"]
+[connection signal="mouse_entered" from="ConnectParent" to="." method="_on_ConnectParent_mouse_entered"]
+[connection signal="mouse_exited" from="ConnectParent" to="." method="_on_ConnectParent_mouse_exited"]

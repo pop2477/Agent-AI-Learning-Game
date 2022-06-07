@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://art/Invert.png" type="Texture" id=1]
+[ext_resource path="res://art/light.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Inverse.gd" type="Script" id=3]
+[ext_resource path="res://art/True.png" type="Texture" id=4]
+[ext_resource path="res://art/False.png" type="Texture" id=5]
+[ext_resource path="res://art/Unevaluated.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 13.9092
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 13.4328
+
+[node name="Inverse" type="Sprite"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="NotEvaluated" type="Sprite" parent="."]
+position = Vector2( 24, -21 )
+texture = ExtResource( 6 )
+
+[node name="True" type="Sprite" parent="."]
+position = Vector2( 24, -21 )
+texture = ExtResource( 4 )
+
+[node name="False" type="Sprite" parent="."]
+position = Vector2( 24, -21 )
+texture = ExtResource( 5 )
+
+[node name="Drag" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Drag"]
+position = Vector2( 1.70824, 1.22016 )
+polygon = PoolVector2Array( -41.8538, -31.0198, -21.7212, -31.1418, -16.8406, -16.3779, -5.98112, -12.5954, -1.71056, -10.5211, 4.14621, -11.9853, 11.3452, -14.4257, 20.3743, -31.3859, 38.1887, -30.7758, -1.96086, 12.5091 )
+
+[node name="ConnectParent" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectParent"]
+position = Vector2( 0, -31 )
+shape = SubResource( 1 )
+
+[node name="ConnectChild" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectChild"]
+position = Vector2( 0, 28 )
+shape = SubResource( 2 )
+
+[node name="Light1" type="Light2D" parent="."]
+position = Vector2( 0, -31 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="Light2" type="Light2D" parent="."]
+position = Vector2( 0, 28 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[connection signal="input_event" from="Drag" to="." method="_on_Drag_input_event"]
+[connection signal="input_event" from="ConnectParent" to="." method="_on_ConnectParent_input_event"]
+[connection signal="mouse_entered" from="ConnectParent" to="." method="_on_ConnectParent_mouse_entered"]
+[connection signal="mouse_exited" from="ConnectParent" to="." method="_on_ConnectParent_mouse_exited"]
+[connection signal="input_event" from="ConnectChild" to="." method="_on_ConnectChild_input_event"]
+[connection signal="mouse_entered" from="ConnectChild" to="." method="_on_ConnectChild_mouse_entered"]
+[connection signal="mouse_exited" from="ConnectChild" to="." method="_on_ConnectChild_mouse_exited"]
